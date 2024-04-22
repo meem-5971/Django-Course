@@ -1,0 +1,69 @@
+{%load static%}
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content  %}
+{{block.super}}
+	{% comment %} <nav class="navbar navbar-expand-lg bg-body-tertiary">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">Navbar</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="{% url 'home'%}">Home</a>
+					</li>
+					<li class="nav-item">
+						{% comment %} <a class="nav-link" href="{% url 'about' id=1 %}">About</a> {% endcomment %}
+						{% comment %} <a class="nav-link" href="{% url 'about'%}">About</a>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							Dropdown
+						</a>
+						<ul class="dropdown-menu">
+							<li><a class="dropdown-item" href="#">Action</a></li>
+							<li><a class="dropdown-item" href="#">Another action</a></li>
+							<li><hr class="dropdown-divider"></li>
+							<li><a class="dropdown-item" href="#">Something else here</a></li>
+						</ul>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link disabled" aria-disabled="true">Disabled</a>
+					</li>
+				</ul>
+				<form class="d-flex" role="search">
+					<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+					<button class="btn btn-outline-success" type="submit">Search</button>
+				</form>
+			</div>
+		</div>
+	</nav> {% endcomment %} 
+{% comment %} <h1>{{id}}</h1> {% endcomment %}
+<h1>{{id.name}}</h1>
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">Id</th>
+				<th scope="col">UserId</th>
+				<th scope="col">Title</th>
+				<th scope="col">Body</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for i in data %}
+			<tr>
+				<th scope="row">{{i.UserId}}</th>
+				<td>{{i.id}}</td>
+				<td>{{i.title}}</td>
+				<td>{{i.body}}</td>
+			</tr>
+			{%endfor%}
+		</tbody>
+	</table>
+	<h1>inside index</h1>
+	<img src="{% static 'images/food2.jpeg'%}" alt="">
+{%endblock%}
