@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block head_title %}{{ title }}{% endblock %}
+{% block content %}
+<div class="container my-5 py-3 px-4 bg-white rounded shadow">
+  <h1 class="font-weight-bold text-center pb-3 pt-2">Loan Report</h1>
+  <hr />
+  <table class="table table-hover table-bordered mt-4">
+    <thead class="thead-dark">
+      <tr>
+        <th>LOAN ID</th>
+        <th>Loan Amount</th>
+        <th>Loan Approved</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for loan in loans %}
+      <tr>
+        <td>{{ loan.id }}</td>
+        <td>
+          <span class="badge badge-success">
+            {{ loan.amount }}
+          </span>
+        </td>
+        <td>{{ loan.loan_approve }}</td>
+        <td>
+          {% if loan.loan_approve %}
+          <a class="btn btn-danger" href='{% url "loan_pay" loan.id %}'>Pay</a>
+          {% else %}
+          <p class="text-danger">Loan Pending</p>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

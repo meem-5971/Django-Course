@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block head_title %} Transaction Report{% endblock %}
+{% block content %}
+
+<div class="container my-5 py-3 px-4 bg-white rounded shadow">
+  <h1 class="font-weight-bold text-center pb-3 pt-2">Transaction Report</h1>
+  <hr />
+  <form method="get" action="{% url 'transaction_report' %}">
+    <div class="form-row justify-content-center">
+      <div class="form-group col-md-3 mx-2">
+        <label for="start_date">From:</label>
+        <input
+          class="form-control"
+          type="date"
+          id="start_date"
+          name="start_date"
+        />
+      </div>
+ 
+      <div class="form-group col-md-3">
+        <label for="end_date">To:</label>
+        <input
+          class="form-control"
+          type="date"
+          id="end_date"
+          name="end_date"
+        />
+      </div>
+      <div class="form-group col-md-2">
+        <button
+          class="btn btn-primary mt-4"
+          type="submit"
+        >
+          Filter
+        </button>
+      </div>
+    </div>
+  </form>
+  <table class="table table-hover table-bordered mt-4">
+    <thead class="thead-dark">
+      <tr>
+        <th>Date</th>
+        <th>Transaction Type</th>
+        <th>Amount</th>
+        <th>Balance After Transaction</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for transaction in object_list %}
+      <tr>
+        <td>{{ transaction.timestamp|date:"F d, Y h:i A" }}</td>
+        <td>
+          <span
+            class="badge {% if transaction.get_transaction_type_display == 'Withdrawal' %} badge-danger {% else %} badge-success {% endif %}"
+          >
+            {{ transaction.get_transaction_type_display }}
+          </span>
+        </td>
+        <td>$ {{ transaction.amount|floatformat:2|intcomma }}</td>
+        <td>$ {{ transaction.balance_after_transaction|floatformat:2|intcomma }}</td>
+      </tr>
+      {% endfor %}
+      <tr class="table-secondary">
+        <th class="text-right" colspan="3">Current Balance</th>
+        <th>$ {{ account.balance|floatformat:2|intcomma }}</th>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

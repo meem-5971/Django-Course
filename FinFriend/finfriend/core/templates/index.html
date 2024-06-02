@@ -1,0 +1,23 @@
+{% extends 'base.html' %} 
+{% load static %} 
+
+{% block head_title %}Banking System{% endblock %} 
+
+{% block content %}
+<div class="container d-flex flex-column flex-md-row align-items-center my-4 my-md-5">
+
+    <div class="d-flex flex-column w-100 lg:w-50 justify-content-center align-items-center pt-3 pb-5 px-3 bg-white rounded-lg bg-opacity-70 mx-3">
+        <h1 class="font-weight-bold display-4 my-3">Welcome to FinFriend</h1>
+        <h3>Your trusted companion in online banking</h3>
+        <p class="mb-3">
+            With FinFriend, you can easily transfer money, monitor transactions in real-time, and achieve your financial goals. We prioritize your security with state-of-the-art measures to protect your data and privacy. Join FinFriend today and take the first step towards a smarter, more secure financial future.
+        </p>
+        <div class="d-flex justify-content-end w-100">
+            <a href="{% url 'register' %}" class="btn btn-primary">Register</a>
+        </div>
+    </div>
+    <div class="w-100 lg:w-50 text-center py-3">
+        <img class="rounded-lg img-fluid" src="{% static './img/bank_banner.jpg' %}" alt="Bank image"/>
+    </div>
+</div>
+{% endblock %}
